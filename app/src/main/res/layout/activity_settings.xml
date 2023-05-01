@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    tools:context=".SettingsActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#0832B3"
+        android:elevation="4dp"
+        app:title="Settings" />
+
+    <ScrollView
+        android:id="@+id/scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/app_bar">
+
+        <LinearLayout
+            android:id="@+id/line_main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/black"
+            android:orientation="vertical"
+            android:textColorPrimary="@color/white"
+            android:textColorSecondary="#222222"
+            android:textSize="16sp" />
+    </ScrollView>
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="-1dp"
+        android:background="#0832B3"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme">
+
+        <LinearLayout
+            android:id="@+id/line_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/btnSettings"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="#0832B3"
+                app:srcCompat="@drawable/baseline_settings_24" />
+
+            <ImageButton
+                android:id="@+id/btnDoor"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="#199803"
+                app:srcCompat="@drawable/baseline_door_back_24" />
+
+            <ImageButton
+                android:id="@+id/btnLogs"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="#E66705"
+                app:srcCompat="@drawable/baseline_history_24" />
+
+        </LinearLayout>
+
+    </androidx.appcompat.widget.Toolbar>
+
+
+</RelativeLayout>

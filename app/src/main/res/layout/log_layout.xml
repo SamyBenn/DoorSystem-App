@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/logLinearLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black">
+        <TextView
+            android:id="@+id/logDoorName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Door Name" />
+
+        <TextView
+            android:id="@+id/logCardUid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Card Uid" />
+
+        <TextView
+            android:id="@+id/logTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Time" />
+
+        <TextView
+            android:id="@+id/logAccessGranted"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Access Granted" />
+</LinearLayout>
