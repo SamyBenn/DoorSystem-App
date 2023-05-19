@@ -25,14 +25,28 @@ class LoginActivity : AppCompatActivity() {
         )
         val edtEmail = findViewById<EditText>(R.id.edtEmail)
         val edtPassword = findViewById<EditText>(R.id.edtPassword)
+        val btnLogin = findViewById<Button>(R.id.btnLogin)
+        val prefs = PreferenceManager.getDefaultSharedPreferences(this)
+
+        //language
+        if (prefs.getString("Lang","En").toString() == "Fr"){
+            val txtSingin = findViewById<TextView>(R.id.signin)
+            val txtforpass = findViewById<TextView>(R.id.forgotpass)
+            runOnUiThread{
+                edtEmail.hint = "Courriel"
+                edtPassword.hint = "Mot de passe"
+                btnLogin.text = "Se Connecter"
+                txtSingin.text = "Connexion"
+                txtforpass.text = "Mot de passe oublié"
+            }
+        }
+
 
         val apiReq = ApiReq
 
-        val prefs = PreferenceManager.getDefaultSharedPreferences(this)
         val apiUrl = prefs.getString("apiUrl", "137.184.168.254")
         val apiPort = prefs.getString("apiPort", "8080")
 
-        val btnLogin = findViewById<Button>(R.id.btnLogin)
         btnLogin.setOnClickListener {
             val doorAct = Intent(this, DoorActivity::class.java)
             //startActivity(doorAct)

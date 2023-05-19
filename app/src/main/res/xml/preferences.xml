@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <ListPreference
+        android:key="Lang"
+        android:title="Language"
+        android:summary="Application language"
+        android:entries="@array/langEntries"
+        android:entryValues="@array/langValues"
+        android:defaultValue="En" />
+
     <EditTextPreference
         android:key="apiUrl"
         android:title="API URL"
