@@ -14,6 +14,7 @@ import android.widget.ScrollView
 import android.widget.TableLayout
 import android.widget.TableRow
 import android.widget.TextView
+import android.widget.Toolbar
 import androidx.preference.PreferenceManager
 import org.eclipse.paho.client.mqttv3.*
 import org.json.JSONArray
@@ -22,7 +23,6 @@ class DoorActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_door)
-
         val btnDoor = findViewById<ImageButton>(R.id.btnDoor)
         val btnSettings = findViewById<ImageButton>(R.id.btnSettings)
         val btnLogs = findViewById<ImageButton>(R.id.btnLogs)
@@ -39,6 +39,7 @@ class DoorActivity : AppCompatActivity() {
             startActivity(logsAct)
         }
 
+        val prefs = PreferenceManager.getDefaultSharedPreferences(this)
         val scrollView = findViewById<ScrollView>(R.id.doorScrollView)
         val table = TableLayout(this)
         table.layoutParams = TableLayout.LayoutParams(
@@ -53,23 +54,31 @@ class DoorActivity : AppCompatActivity() {
         doorNameHeader.text = "Door Name"
         doorNameHeader.setTextColor(Color.parseColor("#FFFFFF"))
         doorNameHeader.setPadding(10, 10, 10, 10)
-        headerRow.addView(doorNameHeader)
 
         val doorLocationHeader = TextView(this)
         doorLocationHeader.text = "Door Location"
         doorLocationHeader.setTextColor(Color.parseColor("#FFFFFF"))
         doorLocationHeader.setPadding(10, 10, 10, 10)
-        headerRow.addView(doorLocationHeader)
 
         val openHeader = TextView(this)
         openHeader.text = "Open"
         openHeader.setTextColor(Color.parseColor("#FFFFFF"))
         openHeader.setPadding(10, 10, 10, 10)
-        headerRow.addView(openHeader)
+        if (prefs.getString("Lang","En").toString() == "Fr"){
+            val upBar = findViewById<androidx.appcompat.widget.Toolbar>(R.id.app_bar)
+            runOnUiThread{
+                upBar.title = "Portes"
+                doorNameHeader.text = "Nom Porte"
+                doorLocationHeader.text = "Emplacement"
+                openHeader.text = "Ouvrir"
+            }
+        }
 
+        headerRow.addView(doorNameHeader)
+        headerRow.addView(doorLocationHeader)
+        headerRow.addView(openHeader)
         table.addView(headerRow)
 
-        val prefs = PreferenceManager.getDefaultSharedPreferences(this)
         val apiUrl = prefs.getString("apiUrl", "137.184.168.254")
         val apiPort = prefs.getString("apiPort", "8080")
 
@@ -165,6 +174,13 @@ class DoorActivity : AppCompatActivity() {
                         }
                     }
 
+                    if (prefs.getString("Lang","En").toString() == "Fr"){
+                        runOnUiThread{
+                            open.text = "Ouvrir"
+                            addCard.text = "Ajouter Catre"
+                            addAccess.text = "Ajouter Acces"
+                        }
+                    }
 
 
                     runOnUiThread {
@@ -181,6 +197,7 @@ class DoorActivity : AppCompatActivity() {
             }
         }
 
+        Log.d("Lang",prefs.getString("Lang", "Defautl lang").toString());
 
 
     }

@@ -75,7 +75,12 @@ class LogsActivity : AppCompatActivity() {
         headerRow.setBackgroundColor(Color.parseColor("#6200EE"))
         tableLayout.addView(headerRow)
         val prefs = PreferenceManager.getDefaultSharedPreferences(this)
-
+        if (prefs.getString("Lang","En").toString() == "Fr") {
+            val upBar = findViewById<androidx.appcompat.widget.Toolbar>(R.id.app_bar)
+            runOnUiThread {
+                upBar.title = "Historique"
+            }
+        }
         val apiUrl = prefs.getString("apiUrl", "default_value")
         val apiPort = prefs.getString("apiPort", "default_value")
 

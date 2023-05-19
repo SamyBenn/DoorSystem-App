@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">DoorSystem-App-4.4</string>
+    <string-array name="langValues">
+        <item>En</item>
+        <item>Fr</item>
+        <item>Es</item>
+    </string-array>
+    <string-array name="langEntries">
+        <item>English</item>
+        <item>Français</item>
+        <item>Espanol</item>
+    </string-array>
 </resources>
