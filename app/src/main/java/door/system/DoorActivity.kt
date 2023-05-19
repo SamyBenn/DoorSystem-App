@@ -10,6 +10,7 @@ import android.view.Gravity
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.LinearLayout
+import android.widget.ScrollView
 import android.widget.TableLayout
 import android.widget.TableRow
 import android.widget.TextView
@@ -38,7 +39,7 @@ class DoorActivity : AppCompatActivity() {
             startActivity(logsAct)
         }
 
-        val linearLayout = findViewById<LinearLayout>(R.id.doorLinearLayout)
+        val scrollView = findViewById<ScrollView>(R.id.doorScrollView)
         val table = TableLayout(this)
         table.layoutParams = TableLayout.LayoutParams(
             TableLayout.LayoutParams.MATCH_PARENT,
@@ -72,7 +73,17 @@ class DoorActivity : AppCompatActivity() {
         val apiUrl = prefs.getString("apiUrl", "137.184.168.254")
         val apiPort = prefs.getString("apiPort", "8080")
 
+        val mqttUrl = prefs.getString("mqttUrl", "137.184.168.254")
+        val mqttPort = prefs.getString("mqttPort", "1883")
+        val mqttUser = prefs.getString("mqttUser", "user")
+        val mqttPass = prefs.getString("mqttPass", "Patate123")
+        val mqttTopicOpen = prefs.getString("mqttOpen", "DoorSystem/door/open")
+        val mqttTopicCardAdd = prefs.getString("mqttCardAdd", "DoorSystem/card/add")
+        val mqttTopicAccessAdd = prefs.getString("mqttAccessAdd", "DoorSystem/access/add")
+
+        val myMqtt by lazy { MyMqtt(applicationContext)}
         val apiReq = ApiReq
+
         apiReq.post("http://$apiUrl:$apiPort/api/door/all", "") { response, error ->
             if (response == null) {
                 //Toast.makeText(this, "Server Error", Toast.LENGTH_SHORT).show()
@@ -120,38 +131,57 @@ class DoorActivity : AppCompatActivity() {
                     open.setPadding(10, 10, 10, 10)
                     open.setBackgroundColor(Color.parseColor("#00FF00"))
                     open.setOnClickListener {
-                        val mqttUrl = prefs.getString("mqttUrl", "default_value")
-                        val mqttPort = prefs.getString("mqttPort", "default_value")
-                        val mqttUser = prefs.getString("mqttUser", "default_value")
-                        val mqttPass = prefs.getString("mqttPass", "default_value")
-                        val mqttTopic = prefs.getString("mqttTopic", "default_value")
-
-                        val myMqtt = MyMqtt(applicationContext, mqttUrl.toString(), mqttPort.toString(), mqttUser.toString(), mqttPass.toString())
-                        myMqtt.publish(mqttTopic.toString(), "open")
+                        Log.d("DoorActivity", door["name"].toString())
+                        if(myMqtt.isConnected()) {
+                            myMqtt.publish(mqttTopicOpen.toString(), door["name"].toString())
+                        }
                     }
+
+                    val addCard = Button(this)
+                    addCard.text = "Add Card"
+                    addCard.textSize = 24f
+                    addCard.setTextColor(Color.parseColor("#000000"))
+                    addCard.gravity = Gravity.CENTER
+                    addCard.setPadding(10, 10, 10, 10)
+                    addCard.setBackgroundColor(Color.parseColor("#00FF00"))
+                    addCard.setOnClickListener {
+                        Log.d("DoorActivity", door["name"].toString())
+                        if(myMqtt.isConnected()) {
+                            myMqtt.publish(mqttTopicCardAdd.toString(), door["name"].toString())
+                        }
+                    }
+
+                    val addAccess = Button(this)
+                    addAccess.text = "Add Access"
+                    addAccess.textSize = 24f
+                    addAccess.setTextColor(Color.parseColor("#000000"))
+                    addAccess.gravity = Gravity.CENTER
+                    addAccess.setPadding(10, 10, 10, 10)
+                    addAccess.setBackgroundColor(Color.parseColor("#00FF00"))
+                    addAccess.setOnClickListener {
+                        Log.d("DoorActivity", door["name"].toString())
+                        if(myMqtt.isConnected()) {
+                            myMqtt.publish(mqttTopicAccessAdd.toString(), door["name"].toString())
+                        }
+                    }
+
 
 
                     runOnUiThread {
                         row.addView(doorName)
                         row.addView(doorLocation)
                         row.addView(open)
+                        row.addView(addCard)
+                        row.addView(addAccess)
                         table.addView(row)
                     }
                     // Add the row to the table
                 }
+                runOnUiThread { scrollView.addView(table)  }
             }
         }
 
-        runOnUiThread { linearLayout.addView(table)  }
 
-        val mqttUrl = prefs.getString("mqttUrl", "default_value")
-        val mqttPort = prefs.getString("mqttPort", "default_value")
-        val mqttUser = prefs.getString("mqttUser", "default_value")
-        val mqttPass = prefs.getString("mqttPass", "default_value")
-
-
-
-        val myMqtt = MyMqtt(applicationContext, mqttUrl.toString(), mqttPort.toString(), mqttUser.toString(), mqttPass.toString())
 
     }
 }

@@ -10,6 +10,7 @@ import android.util.Log
 import android.view.Gravity
 import android.widget.ImageButton
 import android.widget.LinearLayout
+import android.widget.ScrollView
 import android.widget.SimpleAdapter
 import android.widget.TableLayout
 import android.widget.TableRow
@@ -42,39 +43,34 @@ class LogsActivity : AppCompatActivity() {
             startActivity(logsAct)
         }
 
-        val linearLayout = findViewById<LinearLayout>(R.id.logLinearLayout)
+        val scrollView = findViewById<ScrollView>(R.id.logScrollView)
         val tableLayout = TableLayout(this)
         tableLayout.layoutParams = TableLayout.LayoutParams(
             TableLayout.LayoutParams.MATCH_PARENT,
             TableLayout.LayoutParams.WRAP_CONTENT
         )
         val headerRow = TableRow(this)
-        headerRow.layoutParams = TableRow.LayoutParams(
-            TableRow.LayoutParams.MATCH_PARENT,
-            TableRow.LayoutParams.WRAP_CONTENT
-        )
 
-        val header1 = TextView(this)
-        header1.text = "Door Name"
-        header1.textSize = 24f
-        header1.gravity = Gravity.CENTER
-        header1.setPadding(16, 16, 16, 16)
+        val doorNameHeader = TextView(this)
+        doorNameHeader.text = "Door Name"
+        doorNameHeader.textSize = 24f
+        doorNameHeader.gravity = Gravity.CENTER
+        doorNameHeader.setPadding(0, 16, 8, 16)
+        headerRow.addView(doorNameHeader)
 
-        val header2 = TextView(this)
-        header2.text = "Card UID"
-        header2.textSize = 24f
-        header2.gravity = Gravity.CENTER
-        header2.setPadding(16, 16, 16, 16)
+        val carduidHeader = TextView(this)
+        carduidHeader.text = "Card UID"
+        carduidHeader.textSize = 24f
+        carduidHeader.gravity = Gravity.CENTER
+        carduidHeader.setPadding(8, 16, 8, 16)
+        headerRow.addView(carduidHeader)
 
-        val header3 = TextView(this)
-        header3.text = "Time"
-        header3.textSize = 24f
-        header3.gravity = Gravity.CENTER
-        header3.setPadding(16, 16, 16, 16)
-
-        headerRow.addView(header1)
-        headerRow.addView(header2)
-        headerRow.addView(header3)
+        val timeHeader = TextView(this)
+        timeHeader.text = "Time"
+        timeHeader.textSize = 24f
+        timeHeader.gravity = Gravity.CENTER
+        timeHeader.setPadding(8, 16, 8, 16)
+        headerRow.addView(timeHeader)
 
         headerRow.setBackgroundColor(Color.parseColor("#6200EE"))
         tableLayout.addView(headerRow)
@@ -112,38 +108,38 @@ class LogsActivity : AppCompatActivity() {
 
                     val doorName = TextView(this)
                     doorName.text = log["doorName"]
-                    doorName.textSize = 24f
+                    doorName.textSize = 20f
                     doorName.gravity = Gravity.CENTER
-                    doorName.setPadding(16, 16, 16, 16)
+                    doorName.setPadding(0, 16, 8, 16)
 
                     val cardUid = TextView(this)
                     cardUid.text = log["cardUid"]
-                    cardUid.textSize = 24f
+                    cardUid.textSize = 20f
                     cardUid.gravity = Gravity.CENTER
-                    cardUid.setPadding(16, 16, 16, 16)
+                    cardUid.setPadding(8, 16, 8, 16)
 
                     val time = TextView(this)
                     time.text = log["time"]
                     time.textSize = 18f
                     time.gravity = Gravity.CENTER
-                    time.setPadding(16, 16, 16, 16)
+                    time.setPadding(8, 16, 8, 16)
 
                     dataRow.addView(doorName)
                     dataRow.addView(cardUid)
                     dataRow.addView(time)
 
                     if (log["accessGranted"] == "1"){
-                        dataRow.setBackgroundColor(Color.parseColor("#00FF00"))
+                        dataRow.setBackgroundColor(Color.parseColor("#44BB44"))
                     }
                     else{
-                        dataRow.setBackgroundColor(Color.parseColor("#FF0000"))
+                        dataRow.setBackgroundColor(Color.parseColor("#FF2222"))
                     }
 
                     tableLayout.addView(dataRow)
 
                 }
 
-                runOnUiThread {linearLayout.addView(tableLayout)}
+                runOnUiThread {scrollView.addView(tableLayout)}
 
             }
         }

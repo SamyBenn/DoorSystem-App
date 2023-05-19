@@ -16,15 +16,15 @@
         app:title="Logs" />
 
 
-        <LinearLayout
-            android:id="@+id/logLinearLayout"
+        <ScrollView
+            android:id="@+id/logScrollView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:background="@color/black">
 
 
-        </LinearLayout>
+        </ScrollView>
 
 
     <androidx.appcompat.widget.Toolbar

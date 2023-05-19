@@ -79,10 +79,10 @@
         android:textColorSecondary="#888888"
         android:textSize="16sp"/>
     <EditTextPreference
-        android:key="mqttPubAccess"
+        android:key="mqttOpen"
         android:title="MQTT Publish Access Topic"
         android:summary="Enter the MQTT publish access topic"
-        android:defaultValue="/DoorSystem/access"
+        android:defaultValue="DoorSystem/door/open"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
         android:paddingStart="16dp"
@@ -92,10 +92,10 @@
         android:textColorSecondary="#888888"
         android:textSize="16sp" />
     <EditTextPreference
-        android:key="mqttSubAccess"
+        android:key="mqttAccessAdd"
         android:title="MQTT Subscribe Access Topic"
         android:summary="Enter the MQTT subscribe access topic"
-        android:defaultValue="/DoorSystem/access"
+        android:defaultValue="DoorSystem/access/add"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
         android:paddingStart="16dp"
@@ -105,10 +105,10 @@
         android:textColorSecondary="#888888"
         android:textSize="16sp"/>
     <EditTextPreference
-        android:key="mqttPubAdd"
+        android:key="mqttCardAdd"
         android:title="MQTT Publish Add User Topic"
         android:summary="Enter the MQTT publish add user topic"
-        android:defaultValue="/DoorSystem/add"
+        android:defaultValue="DoorSystem/card/add"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
         android:paddingStart="16dp"

@@ -16,16 +16,16 @@
         app:title="Doors" />
 
 
-    <LinearLayout
-        android:id="@+id/doorLinearLayout"
+    <ScrollView
+        android:id="@+id/doorScrollView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@id/app_bar"
         android:orientation="vertical"
         android:background="@color/black">
 
 
-    </LinearLayout>
+    </ScrollView>
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"

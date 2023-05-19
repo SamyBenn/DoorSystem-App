@@ -35,22 +35,22 @@ class LoginActivity : AppCompatActivity() {
         val btnLogin = findViewById<Button>(R.id.btnLogin)
         btnLogin.setOnClickListener {
             val doorAct = Intent(this, DoorActivity::class.java)
-            startActivity(doorAct)
+            //startActivity(doorAct)
             apiReq.post("http://$apiUrl:$apiPort/api/user/auth", "{\"email\":\""+edtEmail.text.toString()+"\",\"password\":\""+edtPassword.text.toString()+"\"}") { response, error ->
-//                if (response == null) {
-//                    //Toast.makeText(this, "Server Error", Toast.LENGTH_SHORT).show()
-//                    Log.d("LoginActivity", "Server Error")
-//                }
-//                else {
-//                    if (response.toString() == "1") {
-//                        val doorAct = Intent(this, DoorActivity::class.java)
-//                        startActivity(doorAct)
-//                    }
-//                    else {
-//                        //Toast.makeText(this, "Login Failed", Toast.LENGTH_SHORT).show()
-//                        Log.d("LoginActivity", "Login Failed")
-//                    }
-//                }
+                if (response == null) {
+                    //Toast.makeText(this, "Server Error", Toast.LENGTH_SHORT).show()
+                    Log.d("LoginActivity", "Server Error")
+                }
+                else {
+                    if (response.toString() == "1") {
+                        val doorAct = Intent(this, DoorActivity::class.java)
+                        startActivity(doorAct)
+                    }
+                    else {
+                        //Toast.makeText(this, "Login Failed", Toast.LENGTH_SHORT).show()
+                        Log.d("LoginActivity", "Login Failed")
+                    }
+                }
             }
         }
 
